@@ -9,6 +9,7 @@ from flask_session import Session
 from flask_wtf import CSRFProtect
 
 from config import config_dict
+from modules.index import index_blue
 
 
 def create_app(config_name):
@@ -37,6 +38,11 @@ def create_app(config_name):
 
     #初始化Session,读取app身上session的配置信息
     Session(app)
+
+    # 注册首页蓝图index_blue, 到app中
+    app.register_blueprint(index_blue)
+
+    print(app.url_map)
 
     return app
 
