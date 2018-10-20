@@ -9,6 +9,7 @@
 
 """""
 from flask import Flask
+from flask import session
 from flask_sqlalchemy import SQLAlchemy
 import redis
 from flask_session import Session
@@ -19,6 +20,7 @@ app = Flask(__name__)
 class Config(object):
     # 调试模式
     DEBUG = True
+    SECRET_KEY = "HDSJHFISHFHI"
 
     # 数据库配置
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:mysql@localhost:3306/information15"
@@ -29,7 +31,10 @@ class Config(object):
     REDIS_PORT = 6379
 
     # session配置
-
+    SESSION_TYPE = "redis"
+    SESSION_USE_SIGNER = True
+    SESSION_REDIS = redis.StrictRedis(host=REDIS_HOST,port=REDIS_PORT)
+    PERMANENT_SESSION_LIFETIME = 3600*24*2  #两天有效期,单位秒
 
 app.config.from_object(Config)
 
@@ -48,6 +53,9 @@ def helloworld():
     # 测试redis存储数据
     redis_store.set("name","laowang")
     print(redis_store.get("name"))
+
+    session["age"] = "13"
+    print(session.get("age"))
 
     return "helloworld"
 
