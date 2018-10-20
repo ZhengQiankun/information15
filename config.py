@@ -1,4 +1,5 @@
 # 配置文件信息
+import logging
 import redis
 
 
@@ -22,6 +23,10 @@ class Config(object):
     PERMANENT_SESSION_LIFETIME = 3600*24*2  #两天有效期,单位秒
 
 
+    # 设置日志等级默认就是DEBUG
+    LEVEL = logging.DEBUG
+
+
 #开发模式的配置信息
 class DevelopConfig(Config):
     pass
@@ -29,6 +34,9 @@ class DevelopConfig(Config):
 # 生产模式(线上模式)
 class ProductConfig(Config):
     DEBUG = False
+
+    # 日志等级
+    LEVEL = logging.ERROR
 
 #测试模式
 class TestingConfig(Config):
