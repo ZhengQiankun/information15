@@ -1,3 +1,4 @@
+from info import redis_store
 from modules.index import index_blue
 
 
