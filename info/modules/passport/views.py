@@ -1,3 +1,5 @@
+from flask import current_app
+from flask import make_response
 from flask import request, jsonify
 
 from info import constants
@@ -37,14 +39,23 @@ def image_code():
     # 3.生成图片验证码
     name, text, image_data = captcha.generate_captcha()
 
-    # 4.保存图片验证码到redis
-    redis_store.set("image_code:%s"%cur_id,text,constants.IMAGE_CODE_REDIS_EXPIRES)
+    try:
+        # 4.保存图片验证码到redis
+        redis_store.set("image_code:%s" % cur_id, text, constants.IMAGE_CODE_REDIS_EXPIRES)
 
-    # 5.判断是否有上个图片验证码编号,有则删除
-    if pre_id:
-        redis_store.delete("image_code:%s"%pre_id)
+        # 5.判断是否有上个图片验证码编号,有则删除
+        if pre_id:
+            redis_store.delete("image_code:%s" % pre_id)
+
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR,errmsg="保存验证码异常")
+
+
 
     # 6.返回图片验证码即可
     # :return:
-    return image_data
+    response = make_response(image_data)
+    response.headers["Content_Type"] = "image/jpg"
+    return response
 

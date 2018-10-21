@@ -498,3 +498,35 @@ INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 15:53:50] "GET /favicon.ico HTTP
 INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 15:53:51] "GET /passport/image_code?cur_id=31bd93cd-31ff-4418-8000-245e86416fcc&pre_id= HTTP/1.1" 200 -
 INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 15:53:53] "GET /passport/image_code?cur_id=31d4263d-f698-4524-bced-29d57a6c97eb&pre_id=31bd93cd-31ff-4418-8000-245e86416fcc HTTP/1.1" 200 -
 INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 15:53:54] "GET /passport/image_code?cur_id=f05b690d-8db3-42bd-8f3b-6cecc0324731&pre_id=31d4263d-f698-4524-bced-29d57a6c97eb HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 295-101-528
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /static/news/css/reset.css HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /static/news/css/main.css HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /static/news/js/main.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /static/news/js/index.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /static/news/images/logo.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /static/news/images/person01.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /static/news/images/news_pic.jpg HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /static/news/images/person.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /static/news/images/pic_code.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:04] "GET /favicon.ico HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /static/news/css/reset.css HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /static/news/css/main.css HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /static/news/js/main.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /static/news/js/index.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /static/news/images/logo.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /static/news/images/person01.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /static/news/images/news_pic.jpg HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /static/news/images/person.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /static/news/images/pic_code.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:06] "GET /favicon.ico HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:07] "GET /passport/image_code?cur_id=d21c277b-24fd-4423-a4bb-cf0282a7185e&pre_id= HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:08] "GET /passport/image_code?cur_id=4436a6d2-90ed-4dc4-aa23-385e6bf1f567&pre_id=d21c277b-24fd-4423-a4bb-cf0282a7185e HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:09] "GET /passport/image_code?cur_id=2dc5858e-b3e0-48a7-bb27-d1890ac36035&pre_id=4436a6d2-90ed-4dc4-aa23-385e6bf1f567 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [21/Oct/2018 16:06:09] "GET /passport/image_code?cur_id=51b2f1fa-70d7-47e9-92ed-71d261908831&pre_id=2dc5858e-b3e0-48a7-bb27-d1890ac36035 HTTP/1.1" 200 -
