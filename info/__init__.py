@@ -1,15 +1,13 @@
 import logging
 from logging.handlers import RotatingFileHandler
 
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
 import redis
+from flask import Flask
 from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 
 from config import config_dict
-
 
 #定义redis_store
 redis_store = None
@@ -45,7 +43,7 @@ def create_app(config_name):
     Session(app)
 
     # 注册首页蓝图index_blue, 到app中
-    from modules.index import index_blue
+    from info.modules.index import index_blue
     app.register_blueprint(index_blue)
 
     print(app.url_map)
