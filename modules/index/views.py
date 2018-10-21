@@ -25,3 +25,10 @@ def helloworld():
     # current_app.logger.warning("警告信息2")
     # current_app.logger.error("错误信息2")
     return render_template("news/index.html")
+
+#处理网站logo,浏览器在运行的时候,自动发送一个GET请求,向/favicon.ico地址
+#只需要编写对应的接口,返回一张图片即可
+#解决: current_app.send_static_file,自动向static文件夹中寻找指定的资源
+@index_blue.route('/favicon.ico')
+def web_logo():
+    return render_template("news/favicon.ico")
