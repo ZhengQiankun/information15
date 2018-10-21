@@ -15,6 +15,7 @@ from info.models import User
 from info.utils.response_code import RET
 from . import passport_blue
 from info.utils.captcha.captcha import captcha
+from datetime import datetime
 
 #功能描述: 退出
 # 请求路径: /passport/logout
@@ -78,6 +79,9 @@ def login():
     session["user_id"] = user.id
     session["nick_name"] = user.nick_name
     session["mobile"] = user.mobile
+
+    # 记录最后一次登录时间
+    user.last_login = datetime.now()
 
     # 7.返回响应
     return jsonify(errno=RET.OK,errmsg="登陆成功")
