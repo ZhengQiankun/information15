@@ -15,6 +15,35 @@ from info.utils.response_code import RET
 from . import passport_blue
 from info.utils.captcha.captcha import captcha
 
+#功能描述: 用户登陆
+# 请求路径: /passport/login
+# 请求方式: POST
+# 请求参数: mobile,password
+# 返回值: errno, errmsg
+
+@passport_blue.route('/login', methods=['POST'])
+def login():
+    """
+    思路分析:
+    1.获取参数
+    2.校验参数,为空校验
+    3.通过手机号,去数据库查询这个用户对象
+    4.判断该用户是否存在
+    5.校验用户密码是否正确
+    6.保存用户的登陆状态到session
+    7.返回响应
+    :return:
+    """
+    # 1.获取参数
+    # 2.校验参数,为空校验
+    # 3.通过手机号,去数据库查询这个用户对象
+    # 4.判断该用户是否存在
+    # 5.校验用户密码是否正确
+    # 6.保存用户的登陆状态到session
+    # 7.返回响应
+
+
+
 #功能描述: 注册用户
 # 请求路径: /passport/register
 # 请求方式: POST
