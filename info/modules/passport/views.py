@@ -72,7 +72,8 @@ def login():
         return jsonify(errno=RET.NODATA,errmsg="用户不存在")
 
     # 5.校验用户密码是否正确
-    if password != user.password_hash:
+    # if password != user.password_hash:
+    if not user.check_password(password):
         return jsonify(errno=RET.DATAERR,errmsg = "密码输入不正确")
 
     # 6.保存用户的登陆状态到session
@@ -150,7 +151,9 @@ def register():
     # 8.创建用户对象,设置属性
     user = User()
     user.nick_name = mobile
-    user.password_hash = password
+    # user.password_hash = password
+    # user.password_hash = password(password)
+    user.password = password
     user.mobile = mobile
 
     # 9.保存用户到数据库mysql
