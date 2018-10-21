@@ -38,7 +38,7 @@ def image_code():
     name, text, image_data = captcha.generate_captcha()
 
     # 4.保存图片验证码到redis
-    redis_store.setex("image_code:%s"%cur_id,text,constants.IMAGE_CODE_REDIS_EXPIRES)
+    redis_store.set("image_code:%s"%cur_id,text,constants.IMAGE_CODE_REDIS_EXPIRES)
 
     # 5.判断是否有上个图片验证码编号,有则删除
     if pre_id:
