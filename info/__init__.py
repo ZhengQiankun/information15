@@ -20,7 +20,7 @@ def create_app(config_name):
     app = Flask(__name__)
 
     # 保护app,使用CSRFProtect
-    CSRFProtect(app)
+    # CSRFProtect(app)
 
     # 根据传入的配置名称,获取对应的配置类
     config = config_dict.get(config_name)

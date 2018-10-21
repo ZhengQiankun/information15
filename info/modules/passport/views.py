@@ -8,7 +8,7 @@ from flask import request, jsonify
 
 from info import constants
 from info import redis_store
-from info.constants import SMS_CODE_REDIS_EXPIRES
+
 from info.libs.yuntongxun.sms import CCP
 from info.utils.response_code import RET
 from . import passport_blue
@@ -54,7 +54,7 @@ def sms_code():
 
     # 4.通过验证码编号取出,redis中的图片验证码A
     try:
-        redis_image_code = redis_store.get("image_code_id")
+        redis_image_code = redis_store.get("image_code:%s"%image_code_id)
     except Exception as e:
         current_app.logger.error(e)
         return jsonify(errno=RET.DBERR,errmsg="获取图片验证码异常")
@@ -82,7 +82,7 @@ def sms_code():
     # 9.发送短信验证码,调用ccp方法
     ccp = CCP()
     try:
-        result = ccp.send_template_sms(mobile, [sms_code,constants.SMS_CODE_REDIS_EXPIRES], 1)
+        result = ccp.send_template_sms(mobile, [sms_code,constants.SMS_CODE_REDIS_EXPIRES/60], 1)
 
     except Exception as e:
         current_app.logger.error(e)
