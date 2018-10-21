@@ -1,13 +1,11 @@
 # from info.utils.captcha import captcha
-from flask import current_app
+from flask import current_app, jsonify
 from flask import render_template
 from flask import session
 
-from info.models import User
+from info.models import User, News
 from info.modules.index import index_blue
-
-
-
+from info.utils.response_code import RET
 
 
 @index_blue.route('/')
@@ -23,10 +21,24 @@ def helloworld():
         except Exception as e:
             current_app.logger.error(e)
 
+    # 查询数据库,根据点击量查询前十条新闻
+    try:
+        news_list = News.query.order_by(News.clicks.desc()).limit(10) .all()
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR,errmsg="新闻查询异常")
+
+    # 将新闻对象列表, 转成字典列表
+    click_news_list = []
+    for news in news_list:
+        click_news_list.append(news.to_dict())
+
+
     # 将用户的信息转成字典
     dict_data = {
         # 如果user存在,返回左边, 否则返回右边
-        "user_info":user.to_dict() if user else ""
+        "user_info":user.to_dict() if user else "",
+        "click_news_list":click_news_list
 
     }
 

@@ -11,6 +11,8 @@ from flask_wtf.csrf import generate_csrf
 from config import config_dict
 
 #定义redis_store
+from info.utils.common import index_class
+
 redis_store = None
 
 db = SQLAlchemy()
@@ -52,6 +54,9 @@ def create_app(config_name):
     # 注册认证蓝图passport_blue到app中
     from info.modules.passport import passport_blue
     app.register_blueprint(passport_blue)
+
+    #将过滤添加,到过滤器模板列表中
+    app.add_template_filter(index_class,"index_class")
 
     # 使用请求钩子after_request,对所有的响应进行拦截,做统一的csrf_token的设置
     @app.after_request
