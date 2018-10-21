@@ -124,7 +124,7 @@ $(function(){
             "mobile":mobile,
             "password":password
         }
-        /*
+
         $.ajax({
             url:'/passport/login',
             type:'post',
@@ -141,7 +141,7 @@ $(function(){
 
             }
         })
-        */
+
     })
 
 
@@ -205,7 +205,7 @@ $(function(){
 
 //退出登陆
 function logout() {
-    /*
+
     $.ajax({
         url:'/passport/logout',
         type:'post',
@@ -214,7 +214,7 @@ function logout() {
             window.location.reload()
         }
     })
-    */
+
 }
 
 
