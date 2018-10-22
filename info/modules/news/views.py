@@ -50,23 +50,17 @@ def news(news_id):
     for item in news_list:
         click_news_list.append(item.to_dict())
 
-    # #获取用户数据
-    # #获取用户的编号,从session
-    # user_id = session.get("user_id")
-    #
-    # # 判断用户是否存在
-    # user = None
-    # if user_id:
-    #     try:
-    #         user = User.query.get(user_id)
-    #     except Exception as e:
-    #         current_app.logger.error(e)
+    # 查询当前用户，是否收藏该新闻
+    is_collected = False
+    if g.user and news in g.user.collection_news:
+        is_collected = True
 
 
     data = {
         "news":news.to_dict(),
         "click_news_list":click_news_list,
-        "user_info":g.user.to_dict() if g.user else ""
+        "user_info":g.user.to_dict() if g.user else "",
+        "is_collected":is_collected
     }
 
     # 5 携带数据渲染页面
