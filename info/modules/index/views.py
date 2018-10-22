@@ -84,8 +84,8 @@ def show_index():
 
     # 将新闻对象列表, 转成字典列表
     click_news_list = []
-    for news in news_list:
-        click_news_list.append(news.to_dict())
+    for click_news in news_list:
+        click_news_list.append(click_news.to_dict())
 
     # 查询所有的分类信息
     try:
