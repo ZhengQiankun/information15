@@ -1,11 +1,13 @@
 # from info.utils.captcha import captcha
 from flask import current_app, jsonify
+from flask import g
 from flask import render_template
 from flask import request
 from flask import session
 
 from info.models import User, News, Category
 from info.modules.index import index_blue
+from info.utils.common import user_login_data
 from info.utils.response_code import RET
 
 #功能描述: 获取首页新闻内容
@@ -13,7 +15,9 @@ from info.utils.response_code import RET
 # 请求方式: GET
 # 请求参数: cid,page,per_page
 # 返回值: data数据
+
 @index_blue.route('/newslist')
+@user_login_data
 def newslist():
     """
     1. 获取参数
@@ -68,17 +72,8 @@ def newslist():
 
 
 @index_blue.route('/')
+@user_login_data
 def show_index():
-    # 获取用户编号，从session
-    user_id = session.get("user_id")
-
-    # 判断用户是否存在
-    user = None
-    if user_id:
-        try:
-            user = User.query.get(user_id)
-        except Exception as e:
-            current_app.logger.error(e)
 
     # 查询数据库,根据点击量查询前十条新闻
     try:
@@ -109,7 +104,7 @@ def show_index():
     # 将用户的信息转成字典
     dict_data = {
         # 如果user存在,返回左边, 否则返回右边
-        "user_info":user.to_dict() if user else "",
+        "user_info":g.user.to_dict() if g.user else "",
         "click_news_list":click_news_list,
         "categories":category_list
 
