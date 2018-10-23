@@ -59,6 +59,10 @@ def create_app(config_name):
     from info.modules.news import news_blue
     app.register_blueprint(news_blue)
 
+    # 注册个人中心user_blue,到app中
+    from info.modules.user import user_blue
+    app.register_blueprint(user_blue)
+
     #将过滤添加,到过滤器模板列表中
     app.add_template_filter(index_class,"index_class")
 
