@@ -17,6 +17,7 @@ from flask import render_template
 # 请求参数:news_id（可选）,comment_id,action,g.user
 # 返回值: errno,errmsg
 @news_blue.route('/comment_like', methods=['POST'])
+@user_login_data
 def comment_like():
     """
     - 1.判断用户是否登陆
@@ -79,6 +80,7 @@ def comment_like():
             if comment_like:
                 # 移除点赞
                 db.session.delete(comment_like)
+                db.session.commit()
 
                 # 更新评论的点赞的数量
                 if comment.like_count > 0:
@@ -86,6 +88,7 @@ def comment_like():
 
     except Exception as e:
         current_app.logger.error(e)
+        db.session.rollback()
         return jsonify(errno=RET.DBERR,errmsg="点赞失败")
 
 
@@ -208,7 +211,7 @@ def news_collect():
 
     # 7.根据操作类型,收藏或者取消收藏操作
     try:
-        if action == "collected":
+        if action == "collect":
             # 判断是否收藏过该新闻
             if not news in g.user.collection_news:
                 g.user.collection_news.append(news)
@@ -260,13 +263,13 @@ def news(news_id):
         news_list = News.query.order_by(News.clicks.desc()).limit(8).all()
     except Exception as e:
         current_app.logger.error(e)
-        return jsonify(errno=RET.DBERR,errmsg="查询数据失败")
+
 
 
     # 4 将新闻列表转成,字典列表
     click_news_list = []
-    for item in news_list:
-        click_news_list.append(item.to_dict())
+    for click_news in news_list:
+        click_news_list.append(click_news.to_dict())
 
     # 查询当前用户，是否收藏该新闻
     is_collected = False
@@ -280,20 +283,26 @@ def news(news_id):
         current_app.logger.error(e)
         return jsonify(errno=RET.DBERR, errmsg="获取评论失败")
 
-    # 获取用户的所有点赞对象
-    comment_likes = g.user.comment_likes
+    try:
+        # 获取用户的所有点赞对象
+        comment_likes = []
+        if g.user:
+            comment_likes = g.user.comment_likes
 
-    # 获取用户所有,点赞过的评论编号
-    comment_ids = []
-    for comment_like in comment_likes:
-        comment_ids.append(comment_like.comment_id)
+        # 获取用户所有,点赞过的评论编号
+        comment_ids = []
+        for comment_like in comment_likes:
+            comment_ids.append(comment_like.comment_id)
+
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg="获取点赞数据失败")
 
     # 将评论对象列表转成,字典列表
     comments_list = []
     for comment in comments:
         com_dict = comment.to_dict()
-        com_dict["is_like"] = True
-        comments_list.append(com_dict)
+        com_dict["is_like"] = False
 
         # 判断当前用户,是否有对该评论点过赞
         # if g.user and 当前评论编号,在用户点赞过的评论编号里面
@@ -302,6 +311,7 @@ def news(news_id):
 
         comments_list.append(com_dict)
 
+    # 5 携带数据渲染页面
     data = {
         "news":news.to_dict(),
         "click_news_list":click_news_list,
@@ -310,7 +320,7 @@ def news(news_id):
         "comments": comments_list
     }
 
-    # 5 携带数据渲染页面
+
     return render_template("news/detail.html",data = data)
 
 
